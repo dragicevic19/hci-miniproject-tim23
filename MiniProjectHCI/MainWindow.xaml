@@ -27,8 +27,18 @@
 
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Margin="10" Height="30" Width="130" HorizontalAlignment="Right" FontSize="16">Choose data:</Label>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Width="130" Height="30" FontSize="16" IsEditable="False" ItemsSource="{Binding Path=DateTypeComboBox}"/>
+        <Label Grid.Row="0" Grid.Column="0" Margin="2" Height="30" Width="100" HorizontalAlignment="Right" FontSize="16">Choose data:</Label>
+        <ComboBox x:Name="DataTypeCombo" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Width="130" Height="30" FontSize="16" IsEditable="False">
+            <ComboBoxItem Selected="CPIComboSelected">CPI</ComboBoxItem>
+            <ComboBoxItem Selected="InflationOrSalesComboSelected" IsSelected="True">Inflation</ComboBoxItem>
+            <ComboBoxItem Selected="InflationOrSalesComboSelected">Retail Sales</ComboBoxItem>
+        </ComboBox>
+
+        <Label x:Name="IntervalLabel" Visibility="Hidden" Grid.Row="0" Grid.Column="2" Margin="2" Height="30" Width="130" HorizontalAlignment="Right" FontSize="16">Choose interval:</Label>
+        <ComboBox Visibility="Hidden" x:Name="IntervalCombo" Grid.Row="0" Grid.Column="3" Margin="10" HorizontalAlignment="Left" Width="130" Height="30" FontSize="16" IsEditable="False">
+            <ComboBoxItem IsSelected="True">monthly</ComboBoxItem>
+            <ComboBoxItem>semiannual</ComboBoxItem>
+        </ComboBox>
 
         <Button Content="Show Data" Grid.Column="6" Grid.Row="0" Width="130" Height="30" Click="Button_Click" Background="#0080cf" Foreground="White">
             <Button.Resources>

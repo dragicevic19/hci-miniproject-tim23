@@ -13,11 +13,25 @@ namespace MiniProjectHCI.Service
 {
     public class APIDataService : IDataService
     {
-        public IEnumerable<DataModel> GetData()
+
+        Dictionary<string, string> dataTypeToFunction;
+           
+        public APIDataService()
+        {
+            dataTypeToFunction = new Dictionary<string, string>();
+            dataTypeToFunction.Add("CPI", "CPI");
+            dataTypeToFunction.Add("Inflation", "INFLATION");
+            dataTypeToFunction.Add("Retail Sales", "RETAIL_SALES"); 
+        }
+
+        public IEnumerable<DataModel> GetData(string function, string interval="")
         {
             using (WebClient client = new WebClient())
             {
-                string requestUri = "https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=3VQ5NWO33Y2HB77U";
+
+                string intervalQuery = (function == "CPI") ? ("&interval=" + interval) : "";
+
+                string requestUri = "https://www.alphavantage.co/query?function=" + dataTypeToFunction[function] + intervalQuery + "&apikey=3VQ5NWO33Y2HB77U";
 
                 string apiResponse = client.DownloadString(requestUri);
 

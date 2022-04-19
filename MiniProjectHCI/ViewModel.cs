@@ -31,12 +31,12 @@ namespace MiniProjectHCI
             BarColumnLabels = new ObservableCollection<string>();
         }
 
-        public void InitializeData()
+        public void InitializeData(string function, string interval="")
         {
             var values = new ChartValues<DataModel>();
             var barValues = new ChartValues<DataModel>();
 
-            IEnumerable<DataModel> data = dataService.GetData();
+            IEnumerable<DataModel> data = dataService.GetData(function, interval);
 
             foreach (var d in data)
             {
@@ -50,7 +50,6 @@ namespace MiniProjectHCI
 
 
             // Create a labels collection from the DataModel items
-            // values.ToList().ForEach(dataModel => this.ColumnLabels.Add(dataModel.Label));
             foreach (var v in values)
             {
                 this.ColumnLabels.Add(v.Label);
