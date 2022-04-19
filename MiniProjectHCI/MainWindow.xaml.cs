@@ -33,6 +33,7 @@ namespace MiniProjectHCI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.Data.Clear();
             this.Data.InitializeData();
             DataContext = this;
         }

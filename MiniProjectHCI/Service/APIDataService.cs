@@ -1,6 +1,7 @@
 ﻿using Nancy.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,17 +23,13 @@ namespace MiniProjectHCI.Service
 
                 APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(apiResponse);
 
-                return (numOfData == 0) ?
+                return
                 listing.data.Select(d => new DataModel()
                 {
                     Label = d.date,
-                    Value = double.Parse(d.value)
-                }) :
-                listing.data.Take(numOfData).Select(d => new DataModel()
-                {
-                    Label = d.date,
-                    Value = double.Parse(d.value)
+                    Value = double.Parse(d.value, CultureInfo.InvariantCulture)
                 });
+                
             }
         }
     }

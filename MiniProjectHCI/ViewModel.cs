@@ -26,6 +26,10 @@ namespace MiniProjectHCI
         public ViewModel()
         {
             //InitializeData();
+            ChartDataSets = new SeriesCollection();
+            LineChartDataSets = new SeriesCollection();
+            ColumnLabels = new ObservableCollection<string>();
+            BarColumnLabels = new ObservableCollection<string>();
         }
 
         public void InitializeData()
@@ -47,8 +51,8 @@ namespace MiniProjectHCI
 
 
             // Create a labels collection from the DataModel items
-            this.ColumnLabels = new ObservableCollection<string>(values.Select(dataModel => dataModel.Label));
-            this.BarColumnLabels = new ObservableCollection<string>(barValues.Select(dataModel => dataModel.Label));
+            values.ToList().ForEach(dataModel => this.ColumnLabels.Add(dataModel.Label));
+            this.BarColumnLabels = (ObservableCollection<string>) barValues.Select(dataModel => dataModel.Label);
             var dataMapper = new CartesianMapper<DataModel>()
               .Y(dataModel => dataModel.Value);
             //.Fill(dataModel => dataModel.Value > 15.0 ? Brushes.Red : Brushes.Green);
@@ -75,6 +79,15 @@ namespace MiniProjectHCI
                     PointGeometrySize = 15
                 }
             };
+        }
+
+        internal void Clear()
+        {
+            if (ChartDataSets != null)
+            {
+                ChartDataSets.Clear();
+                LineChartDataSets.Clear();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
