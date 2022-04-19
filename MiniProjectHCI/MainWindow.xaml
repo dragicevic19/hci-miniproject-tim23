@@ -4,9 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiniProjectHCI"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1000" Width="1850">
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10" HorizontalAlignment="Right" FontSize="16" Text="Choose data:"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" FontSize="16" >
+            <ComboBoxItem Content="CPI" IsSelected="True"/>
+            <ComboBoxItem Content="Inflation"/>
+            <ComboBoxItem Content="GDP"/>
+        </ComboBox>
+
+        <wpf:CartesianChart Grid.Row="1" Grid.ColumnSpan="10" Margin="25" Series="{Binding ChartDataSets}">
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis Labels="{Binding ColumnLabels}" />
+            </wpf:CartesianChart.AxisX>
+        </wpf:CartesianChart>
+
+        <wpf:CartesianChart Grid.Row="2" Grid.ColumnSpan="10" Margin="25" Series="{Binding LineChartDataSets}">
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis Labels="{Binding ColumnLabels}" />
+            </wpf:CartesianChart.AxisX>
+        </wpf:CartesianChart>
+        
     </Grid>
 </Window>

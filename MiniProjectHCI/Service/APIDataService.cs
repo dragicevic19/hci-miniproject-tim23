@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -11,22 +12,20 @@ namespace MiniProjectHCI.Service
 {
     public class APIDataService : IDataService
     {
-        public async Task<IEnumerable<DataModel>> GetData()
+        public IEnumerable<DataModel> GetData()
         {
-            using (HttpClient client = new HttpClient())
+            using (WebClient client = new WebClient())
             {
                 string requestUri = "https://www.alphavantage.co/query?function=CPI&interval=monthly&apikey=3VQ5NWO33Y2HB77U";
 
-                HttpResponseMessage apiResponse = await client.GetAsync(requestUri);
+                string apiResponse = client.DownloadString(requestUri);
 
-                string jsonResponse = await apiResponse.Content.ReadAsStringAsync();
+                APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(apiResponse);
 
-                APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(jsonResponse);
-
-                return listing.data.Select(d => new DataModel()
+                return listing.data.Take(20).Select(d => new DataModel()
                 {
-                    Date = DateOnly.Parse(d.date),
-                    Value = Double.Parse(d.value)
+                    Label = d.date,
+                    Value = double.Parse(d.value)
                 });
             }
         }

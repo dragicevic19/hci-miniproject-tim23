@@ -8,6 +8,6 @@ namespace MiniProjectHCI.Service
 {
     public interface IDataService
     {
-        Task<IEnumerable<DataModel>> GetData();
+        IEnumerable<DataModel> GetData();
     }
 }

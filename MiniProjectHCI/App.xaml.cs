@@ -14,13 +14,5 @@ namespace MiniProjectHCI
     /// </summary>
     public partial class App : Application
     {
-        protected override async void OnStartup(StartupEventArgs e)
-        {
-            APIDataService dataService = new APIDataService();
-
-            var result = await dataService.GetData();
-
-            base.OnStartup(e);
-        }
     }
 }
