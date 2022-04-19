@@ -12,7 +12,7 @@ namespace MiniProjectHCI.Service
 {
     public class APIDataService : IDataService
     {
-        public IEnumerable<DataModel> GetData()
+        public IEnumerable<DataModel> GetData(int numOfData)
         {
             using (WebClient client = new WebClient())
             {
@@ -22,7 +22,13 @@ namespace MiniProjectHCI.Service
 
                 APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(apiResponse);
 
-                return listing.data.Take(20).Select(d => new DataModel()
+                return (numOfData == 0) ?
+                listing.data.Select(d => new DataModel()
+                {
+                    Label = d.date,
+                    Value = double.Parse(d.value)
+                }) :
+                listing.data.Take(numOfData).Select(d => new DataModel()
                 {
                     Label = d.date,
                     Value = double.Parse(d.value)

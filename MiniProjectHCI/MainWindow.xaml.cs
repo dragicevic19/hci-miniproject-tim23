@@ -20,12 +20,23 @@ namespace MiniProjectHCI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ViewModel Data {get; set;}
 
         public MainWindow()
         {
-            Console.WriteLine("TEST");
-
             InitializeComponent();
+            this.Title = "Economic Indicators";
+            // ikonica
+
+            Data = new ViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Data.InitializeData();
+            DataContext = this;
+        }
+
+
     }
 }
