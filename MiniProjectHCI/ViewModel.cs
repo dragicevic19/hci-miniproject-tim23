@@ -25,7 +25,6 @@ namespace MiniProjectHCI
 
         public ViewModel()
         {
-            //InitializeData();
             ChartDataSets = new SeriesCollection();
             LineChartDataSets = new SeriesCollection();
             ColumnLabels = new ObservableCollection<string>();
@@ -37,7 +36,7 @@ namespace MiniProjectHCI
             var values = new ChartValues<DataModel>();
             var barValues = new ChartValues<DataModel>();
 
-            IEnumerable<DataModel> data = dataService.GetData(0);
+            IEnumerable<DataModel> data = dataService.GetData();
 
             foreach (var d in data)
             {
@@ -51,26 +50,35 @@ namespace MiniProjectHCI
 
 
             // Create a labels collection from the DataModel items
-            values.ToList().ForEach(dataModel => this.ColumnLabels.Add(dataModel.Label));
-            this.BarColumnLabels = (ObservableCollection<string>) barValues.Select(dataModel => dataModel.Label);
+            // values.ToList().ForEach(dataModel => this.ColumnLabels.Add(dataModel.Label));
+            foreach (var v in values)
+            {
+                this.ColumnLabels.Add(v.Label);
+            }
+            foreach (var v in barValues)
+            {
+                this.BarColumnLabels.Add(v.Label);
+            }
+
+            // this.ColumnLabels = new ObservableCollection<string>(values.Select(dataModel => dataModel.Label));
+            //this.BarColumnLabels = new ObservableCollection<string>(barValues.Select(dataModel => dataModel.Label));
+
             var dataMapper = new CartesianMapper<DataModel>()
               .Y(dataModel => dataModel.Value);
             //.Fill(dataModel => dataModel.Value > 15.0 ? Brushes.Red : Brushes.Green);
 
-            this.ChartDataSets = new SeriesCollection
-            {
+            this.ChartDataSets.Add(
                 new ColumnSeries
                 {
                 Values = barValues,
                 Configuration = dataMapper
                 }
-            };
+            );
 
             var lineDataMapper = new CartesianMapper<DataModel>()
                 .Y(dataModel => dataModel.Value);
 
-            this.LineChartDataSets = new SeriesCollection
-            {
+            this.LineChartDataSets.Add(
                 new LineSeries
                 {
                     Values = values,
@@ -78,15 +86,17 @@ namespace MiniProjectHCI
                     PointGeometry = null,
                     PointGeometrySize = 15
                 }
-            };
+            );
         }
 
         internal void Clear()
         {
-            if (ChartDataSets != null)
+            if (ChartDataSets.Count() != 0)
             {
-                ChartDataSets.Clear();
-                LineChartDataSets.Clear();
+                this.ChartDataSets.Clear();
+                this.LineChartDataSets.Clear();
+                this.BarColumnLabels.Clear();
+                this.ColumnLabels.Clear();
             }
         }
 

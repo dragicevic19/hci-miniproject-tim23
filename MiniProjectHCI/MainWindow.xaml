@@ -27,21 +27,18 @@
 
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10" HorizontalAlignment="Right" FontSize="16" Text="Choose data:"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="30" Background="#8FBC8F" FontSize="16" >
-            <ComboBoxItem Content="CPI" IsSelected="True"/>
-            <ComboBoxItem Content="Inflation"/>
-            <ComboBoxItem Content="GDP"/>
-        </ComboBox>
-        <Button Content="Draw" Grid.Column="6" Grid.Row="0" Width="130" Height="30" Click="Button_Click" Background="#008B8B" Foreground="White">
+        <Label Grid.Row="0" Grid.Column="0" Margin="10" Height="30" Width="130" HorizontalAlignment="Right" FontSize="16">Choose data:</Label>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" Width="130" Height="30" FontSize="16" IsEditable="False" ItemsSource="{Binding Path=DateTypeComboBox}"/>
+
+        <Button Content="Show Data" Grid.Column="6" Grid.Row="0" Width="130" Height="30" Click="Button_Click" Background="#0080cf" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="0"/>
+                    <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
 
-        <wpf:CartesianChart Grid.Row="1" Grid.ColumnSpan="10" Margin="25" Series="{Binding Path=Data.ChartDataSets}">
+        <wpf:CartesianChart Grid.Row="1" Grid.ColumnSpan="10" Margin="25" Series="{Binding Data.ChartDataSets}">
             <wpf:CartesianChart.AxisX>
                 <wpf:Axis Title="Date" Labels="{Binding Data.BarColumnLabels}" />
             </wpf:CartesianChart.AxisX>

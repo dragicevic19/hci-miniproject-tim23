@@ -13,7 +13,7 @@ namespace MiniProjectHCI.Service
 {
     public class APIDataService : IDataService
     {
-        public IEnumerable<DataModel> GetData(int numOfData)
+        public IEnumerable<DataModel> GetData()
         {
             using (WebClient client = new WebClient())
             {

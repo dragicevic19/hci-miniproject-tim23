@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +20,21 @@ namespace MiniProjectHCI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public ViewModel Data {get; set;}
+        public ObservableCollection<string> DataTypeComboBox { get; set; }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public MainWindow()
         {
@@ -37,7 +51,6 @@ namespace MiniProjectHCI
             this.Data.InitializeData();
             DataContext = this;
         }
-
 
     }
 }
