@@ -43,6 +43,30 @@ namespace MiniProjectHCI
             string interval = (function == "CPI") ? IntervalCombo.SelectedValue.ToString().Split(':').Last().Trim() : "";
             this.Data.Clear();
             this.Data.InitializeData(function, interval);
+
+            if (function == "CPI")
+            {
+                ValueAxis.Title = "Values     (CPI Index)";
+                ValueAxisLinear.Title = "Values     (CPI Index)";
+            }
+
+            else if(function == "Inflation")
+            {
+                ValueAxis.Title = "Values     (percent %)";
+                ValueAxisLinear.Title = "Values     (percent %)";
+            }
+
+            else if(function == "Retail Sales")
+            {
+                ValueAxis.Title = "Values     (millions of dollars)";
+                ValueAxisLinear.Title = "Values     (millions of dollars)";
+            }
+
+            else
+            {
+                ValueAxis.Title = "Values";
+                ValueAxisLinear.Title = "Values";
+            }
         }
 
         private void CPIComboSelected(object sender, RoutedEventArgs e)

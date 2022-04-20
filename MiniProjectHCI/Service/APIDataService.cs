@@ -34,16 +34,19 @@ namespace MiniProjectHCI.Service
                 string requestUri = "https://www.alphavantage.co/query?function=" + dataTypeToFunction[function] + intervalQuery + "&apikey=3VQ5NWO33Y2HB77U";
 
                 string apiResponse = client.DownloadString(requestUri);
-
+                
                 APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(apiResponse);
-
+                
                 return
                 listing.data.Select(d => new DataModel()
                 {
                     Label = d.date,
                     Value = double.Parse(d.value, CultureInfo.InvariantCulture)
                 });
+
                 
+
+
             }
         }
     }

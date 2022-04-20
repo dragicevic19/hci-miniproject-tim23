@@ -50,10 +50,10 @@
 
         <wpf:CartesianChart Grid.Row="1" Grid.ColumnSpan="10" Margin="25" Series="{Binding Data.ChartDataSets}">
             <wpf:CartesianChart.AxisX>
-                <wpf:Axis Title="Date" Labels="{Binding Data.BarColumnLabels}" />
+                <wpf:Axis Title="Date" Labels="{Binding Data.BarColumnLabels}"/>
             </wpf:CartesianChart.AxisX>
             <wpf:CartesianChart.AxisY>
-                <wpf:Axis Title="Value"/>
+                <wpf:Axis x:Name="ValueAxis" Title="Values"/>
             </wpf:CartesianChart.AxisY>
         </wpf:CartesianChart>
 
@@ -62,7 +62,7 @@
                 <wpf:Axis Title="Date" Labels="{Binding Data.ColumnLabels}" />
             </wpf:CartesianChart.AxisX>
             <wpf:CartesianChart.AxisY>
-                <wpf:Axis Title="Value"/>
+                <wpf:Axis x:Name="ValueAxisLinear" Title="Values"/>
             </wpf:CartesianChart.AxisY>
         </wpf:CartesianChart>
         
