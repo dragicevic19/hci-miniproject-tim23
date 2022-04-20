@@ -23,6 +23,7 @@ namespace MiniProjectHCI
     public partial class MainWindow : Window
     {
         public ViewModel Data {get; set;}
+        public TableWindow TableWindow { get; set; }
 
         public MainWindow()
         {
@@ -34,6 +35,12 @@ namespace MiniProjectHCI
             
             DataContext = this;
             Data = new ViewModel();
+
+        }
+        private void Table_Button_Click(object sender, RoutedEventArgs e)
+        {
+            TableWindow = new TableWindow();
+            TableWindow.Show();
 
         }
 

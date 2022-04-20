@@ -48,6 +48,14 @@
             </Button.Resources>
         </Button>
 
+        <Button Content="Show Table" Grid.Column="5" Grid.Row="0" Width="130" Height="30" Click="Table_Button_Click" Background="#0080cf" Foreground="White">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
         <wpf:CartesianChart Grid.Row="1" Grid.ColumnSpan="10" Margin="25" Series="{Binding Data.ChartDataSets}">
             <wpf:CartesianChart.AxisX>
                 <wpf:Axis Title="Date" Labels="{Binding Data.BarColumnLabels}"/>
