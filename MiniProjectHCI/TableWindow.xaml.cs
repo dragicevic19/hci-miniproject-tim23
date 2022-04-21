@@ -19,9 +19,12 @@ namespace MiniProjectHCI
     /// </summary>
     public partial class TableWindow : Window
     {
-        public TableWindow()
+        public ViewModel Data { get; set; } // a u InitializeData pravis neku novu listu za podatke za tabelu
+
+        public TableWindow(ViewModel data)
         {
             InitializeComponent();
+            this.Data = data;
         }
     }
 }

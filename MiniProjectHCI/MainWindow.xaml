@@ -40,7 +40,7 @@
             <ComboBoxItem>semiannual</ComboBoxItem>
         </ComboBox>
 
-        <Button Content="Show Data" Grid.Column="6" Grid.Row="0" Width="130" Height="30" Click="Button_Click" Background="#0080cf" Foreground="White">
+        <Button Content="Load Data" Grid.Column="6" Grid.Row="0" Width="130" Height="30" Click="Button_Click" Background="#0080cf" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -48,7 +48,7 @@
             </Button.Resources>
         </Button>
 
-        <Button Content="Show Table" Grid.Column="5" Grid.Row="0" Width="130" Height="30" Click="Table_Button_Click" Background="#0080cf" Foreground="White">
+        <Button Content="Show Table" Grid.Column="7" Grid.Row="0" Width="130" Height="30" Click="Table_Button_Click" Background="#0080cf" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -70,7 +70,7 @@
                 <wpf:Axis Title="Date" Labels="{Binding Data.ColumnLabels}" />
             </wpf:CartesianChart.AxisX>
             <wpf:CartesianChart.AxisY>
-                <wpf:Axis x:Name="ValueAxisLinear" Title="Values"/>
+                <wpf:Axis x:Name="ValueAxisLine" Title="Values"/>
             </wpf:CartesianChart.AxisY>
         </wpf:CartesianChart>
         

@@ -8,6 +8,7 @@ namespace MiniProjectHCI.Service
 {
     public interface IDataService
     {
+        string Unit { get; set; }
         IEnumerable<DataModel> GetData(string function, string interval);
     }
 }

@@ -20,11 +20,11 @@ namespace MiniProjectHCI
         public ObservableCollection<string> ColumnLabels { get; set; }
         public ObservableCollection<string> BarColumnLabels { get; set; }
 
+        private IDataService dataService;
 
-        private IDataService dataService = new APIDataService();
-
-        public ViewModel()
+        public ViewModel(IDataService dataService)
         {
+            this.dataService = dataService;
             ChartDataSets = new SeriesCollection();
             LineChartDataSets = new SeriesCollection();
             ColumnLabels = new ObservableCollection<string>();
@@ -48,8 +48,9 @@ namespace MiniProjectHCI
                 barValues.Add(new DataModel() { Label = d.Label, Value = d.Value });
             }
 
+            // ovde dodati i ucitavanje za tabele
 
-            // Create a labels collection from the DataModel items
+
             foreach (var v in values)
             {
                 this.ColumnLabels.Add(v.Label);
@@ -59,12 +60,8 @@ namespace MiniProjectHCI
                 this.BarColumnLabels.Add(v.Label);
             }
 
-            // this.ColumnLabels = new ObservableCollection<string>(values.Select(dataModel => dataModel.Label));
-            //this.BarColumnLabels = new ObservableCollection<string>(barValues.Select(dataModel => dataModel.Label));
-
             var dataMapper = new CartesianMapper<DataModel>()
               .Y(dataModel => dataModel.Value);
-            //.Fill(dataModel => dataModel.Value > 15.0 ? Brushes.Red : Brushes.Green);
 
             this.ChartDataSets.Add(
                 new ColumnSeries
@@ -90,7 +87,7 @@ namespace MiniProjectHCI
 
         internal void Clear()
         {
-            if (ChartDataSets.Count() != 0)
+            if (ChartDataSets.Count != 0)
             {
                 this.ChartDataSets.Clear();
                 this.LineChartDataSets.Clear();

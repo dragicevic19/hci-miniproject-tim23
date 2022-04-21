@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniProjectHCI.Service;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,54 +26,44 @@ namespace MiniProjectHCI
         public ViewModel Data {get; set;}
         public TableWindow TableWindow { get; set; }
 
+        private IDataService dataService;
+
         public MainWindow()
         {
             InitializeComponent();
+
             this.Title = "Economic Indicators";
-            // ikonica
             Uri iconUri = new Uri("../../../resources/economy.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
-            
+
+            dataService = new APIDataService();
+            Data = new ViewModel(dataService);
+
             DataContext = this;
-            Data = new ViewModel();
 
         }
         private void Table_Button_Click(object sender, RoutedEventArgs e)
         {
-            TableWindow = new TableWindow();
+            TableWindow = new TableWindow(Data);
             TableWindow.Show();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string function = DataTypeCombo.SelectedValue.ToString().Split(':').Last().Trim();
-            string interval = (function == "CPI") ? IntervalCombo.SelectedValue.ToString().Split(':').Last().Trim() : "";
-            this.Data.Clear();
-            this.Data.InitializeData(function, interval);
-
-            if (function == "CPI")
+            try
             {
-                ValueAxis.Title = "Values     (CPI Index)";
-                ValueAxisLinear.Title = "Values     (CPI Index)";
+                string function = DataTypeCombo.SelectedValue.ToString().Split(':').Last().Trim();
+                string interval = (function == "CPI") ? IntervalCombo.SelectedValue.ToString().Split(':').Last().Trim() : "";
+
+                this.Data.Clear();
+                this.Data.InitializeData(function, interval);
+
+                ValueAxis.Title = "Values\t[" + dataService.Unit + "]";
+                ValueAxisLine.Title = "Values\t[" + dataService.Unit + "]";
             }
-
-            else if(function == "Inflation")
+            catch (Exception ex)
             {
-                ValueAxis.Title = "Values     (percent %)";
-                ValueAxisLinear.Title = "Values     (percent %)";
-            }
-
-            else if(function == "Retail Sales")
-            {
-                ValueAxis.Title = "Values     (millions of dollars)";
-                ValueAxisLinear.Title = "Values     (millions of dollars)";
-            }
-
-            else
-            {
-                ValueAxis.Title = "Values";
-                ValueAxisLinear.Title = "Values";
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -92,7 +83,6 @@ namespace MiniProjectHCI
                 IntervalLabel.Visibility = Visibility.Hidden;
                 IntervalCombo.Visibility = Visibility.Hidden;
             }
-            
         }
     }
 }

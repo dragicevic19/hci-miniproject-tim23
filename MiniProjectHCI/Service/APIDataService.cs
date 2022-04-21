@@ -14,10 +14,12 @@ namespace MiniProjectHCI.Service
     public class APIDataService : IDataService
     {
 
-        Dictionary<string, string> dataTypeToFunction;
+        private Dictionary<string, string> dataTypeToFunction;
+        public string Unit { get; set; }
            
         public APIDataService()
         {
+            Unit = "";
             dataTypeToFunction = new Dictionary<string, string>();
             dataTypeToFunction.Add("CPI", "CPI");
             dataTypeToFunction.Add("Inflation", "INFLATION");
@@ -36,6 +38,8 @@ namespace MiniProjectHCI.Service
                 string apiResponse = client.DownloadString(requestUri);
                 
                 APIDataListing listing = new JavaScriptSerializer().Deserialize<APIDataListing>(apiResponse);
+
+                this.Unit = listing.unit;
                 
                 return
                 listing.data.Select(d => new DataModel()
