@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace MiniProjectHCI
 {
@@ -19,12 +20,23 @@ namespace MiniProjectHCI
     /// </summary>
     public partial class TableWindow : Window
     {
-        public ViewModel Data { get; set; } // a u InitializeData pravis neku novu listu za podatke za tabelu
 
-        public TableWindow(ViewModel data)
+      
+        public ViewModel vm { get; set; }
+        public TableWindow(ViewModel d)
         {
             InitializeComponent();
-            this.Data = data;
+            this.DataContext = this;
+
+            vm = d;
+           
+            
+          
+          
+           
+
         }
+
+
     }
 }

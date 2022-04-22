@@ -20,7 +20,12 @@ namespace MiniProjectHCI
         public ObservableCollection<string> ColumnLabels { get; set; }
         public ObservableCollection<string> BarColumnLabels { get; set; }
 
+ 
         private IDataService dataService;
+ 
+        public ObservableCollection<DataModel> TableData { get; set; }
+
+ 
 
         public ViewModel(IDataService dataService)
         {
@@ -29,9 +34,16 @@ namespace MiniProjectHCI
             LineChartDataSets = new SeriesCollection();
             ColumnLabels = new ObservableCollection<string>();
             BarColumnLabels = new ObservableCollection<string>();
+            TableData = new ObservableCollection<DataModel>();
+        }
+        public IEnumerable<DataModel> InitializeDataForTable(string function, string interval = "")
+        {
+            IEnumerable<DataModel> data = dataService.GetData(function, interval);
+            return data;
         }
 
-        public void InitializeData(string function, string interval="")
+
+            public void InitializeData(string function, string interval="")
         {
             var values = new ChartValues<DataModel>();
             var barValues = new ChartValues<DataModel>();
@@ -41,6 +53,7 @@ namespace MiniProjectHCI
             foreach (var d in data)
             {
                 values.Add(new DataModel() { Label = d.Label, Value = d.Value });
+                TableData.Add(new DataModel() { Label = d.Label, Value = d.Value });
             }
             IEnumerable<DataModel> barData = values.Take(20);
             foreach (var d in barData)

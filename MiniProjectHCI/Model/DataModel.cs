@@ -10,16 +10,6 @@ namespace MiniProjectHCI
 {
     public class DataModel : INotifyPropertyChanged
     {
-        private double value;
-        public double Value
-        {
-            get => this.value;
-            set
-            {
-                this.value = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string label;
         public string Label
@@ -31,6 +21,20 @@ namespace MiniProjectHCI
                 OnPropertyChanged();
             }
         }
+
+
+        private double value;
+        public double Value
+        {
+            get => this.value;
+            set
+            {
+                this.value = value;
+                OnPropertyChanged();
+            }
+        }
+
+      
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

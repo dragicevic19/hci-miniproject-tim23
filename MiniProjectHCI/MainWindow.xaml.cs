@@ -24,6 +24,8 @@ namespace MiniProjectHCI
     public partial class MainWindow : Window
     {
         public ViewModel Data {get; set;}
+        public ViewModel TableData { get; set; }
+
         public TableWindow TableWindow { get; set; }
 
         private IDataService dataService;
@@ -40,11 +42,24 @@ namespace MiniProjectHCI
             Data = new ViewModel(dataService);
 
             DataContext = this;
+ 
+            Data = new ViewModel();
+            TableData = new ViewModel();
+ 
 
         }
         private void Table_Button_Click(object sender, RoutedEventArgs e)
         {
+ 
             TableWindow = new TableWindow(Data);
+ 
+            string function = DataTypeCombo.SelectedValue.ToString().Split(':').Last().Trim();
+            string interval = (function == "CPI") ? IntervalCombo.SelectedValue.ToString().Split(':').Last().Trim() : "";
+            this.TableData.Clear();
+            this.TableData.InitializeData(function, interval);
+
+            TableWindow = new TableWindow(this.TableData);
+ 
             TableWindow.Show();
         }
 
