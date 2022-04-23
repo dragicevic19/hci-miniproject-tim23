@@ -106,6 +106,7 @@ namespace MiniProjectHCI
                 this.LineChartDataSets.Clear();
                 this.BarColumnLabels.Clear();
                 this.ColumnLabels.Clear();
+                this.TableData.Clear();
             }
         }
 

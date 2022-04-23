@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiniProjectHCI"
         mc:Ignorable="d"
-        Title="TableWindow" Height="450" Width="800">
+        Height="450" Width="800">
     <Grid>
 
         <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=vm.TableData}" IsReadOnly="True" />

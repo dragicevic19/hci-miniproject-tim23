@@ -20,21 +20,17 @@ namespace MiniProjectHCI
     /// </summary>
     public partial class TableWindow : Window
     {
-
-      
         public ViewModel vm { get; set; }
         public TableWindow(ViewModel d)
         {
+            Title = "Economic Indicators [TABLE]";
+            Uri iconUri = new Uri("../../../resources/economy.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+
             InitializeComponent();
             this.DataContext = this;
 
             vm = d;
-           
-            
-          
-          
-           
-
         }
 
 
