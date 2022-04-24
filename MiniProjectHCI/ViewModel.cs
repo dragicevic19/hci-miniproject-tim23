@@ -21,7 +21,8 @@ namespace MiniProjectHCI
         public ObservableCollection<string> BarColumnLabels { get; set; }
 
  
-        private IDataService dataService;
+        public IDataService dataService { get; }
+     
  
         public ObservableCollection<DataModel> TableData { get; set; }
 

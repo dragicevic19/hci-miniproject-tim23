@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiniProjectHCI"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="800" Width="700">
     <Grid>
 
-        <DataGrid x:Name="dgrMain" ItemsSource="{Binding Path=vm.TableData}" IsReadOnly="True" />
+        <DataGrid x:Name="dgrMain"  ItemsSource="{Binding Path=vm.TableData}" IsReadOnly="True"  FontSize="20" ColumnWidth="350" AutoGenerateColumns ="False"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Date" Binding="{Binding  Label}" />
+                <DataGridTextColumn x:Name="headerValue" Header="Value" Binding="{Binding  Value}" />
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 
 </Window>
