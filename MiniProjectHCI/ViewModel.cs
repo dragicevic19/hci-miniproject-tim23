@@ -44,7 +44,7 @@ namespace MiniProjectHCI
         }
 
 
-            public void InitializeData(string function, string interval="")
+        public void InitializeData(string function, string interval="")
         {
             var values = new ChartValues<DataModel>();
             var barValues = new ChartValues<DataModel>();
@@ -56,13 +56,11 @@ namespace MiniProjectHCI
                 values.Add(new DataModel() { Label = d.Label, Value = d.Value });
                 TableData.Add(new DataModel() { Label = d.Label, Value = d.Value });
             }
-            IEnumerable<DataModel> barData = values.Take(20);
+            IEnumerable<DataModel> barData = values.Take(100);
             foreach (var d in barData)
             {
                 barValues.Add(new DataModel() { Label = d.Label, Value = d.Value });
             }
-
-            // ovde dodati i ucitavanje za tabele
 
 
             foreach (var v in values)

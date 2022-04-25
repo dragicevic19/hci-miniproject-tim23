@@ -31,9 +31,7 @@ namespace MiniProjectHCI
             this.DataContext = this;
 
             vm = d;
-            
 
-            String s = "naslov";
             headerValue.Header = "Values\t[" + vm.dataService.Unit.ToString()+ "]"; ;
         }
 
